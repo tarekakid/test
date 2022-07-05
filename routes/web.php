@@ -17,59 +17,104 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Start Operations on Materials
-    Route::get('/', [MaterialsController::class,'main']);
-    // Create Material page
-    Route::get('create-material', [MaterialsController::class,'index']);
-    // Edite selected Material page
-    Route::get('edit-material/{id}', [MaterialsController::class,'edit']);
-    // Add new MAterial
-    Route::post('add-material', [MaterialsController::class,'create']);
-    // Update Material information
-    Route::post('update-material/{id}', [MaterialsController::class,'update']);
-    // Delete selected page
-    Route::get('delete-material/{id}', [MaterialsController::class,'delete']);
-// End Operations on Materials
+// Начать операции над материалами
 
-// Start Operations on Tags
+    // Получить информации о материалах
+    Route::get('/', [MaterialsController::class,'main']);
+
+    // Страница для добавления нового материала
+    Route::get('create-material', [MaterialsController::class,'index']);
+
+    // Редактировать выбранного материала
+    Route::get('edit-material/{id}', [MaterialsController::class,'edit']);
+
+    // Создать нового материала
+    Route::post('add-material', [MaterialsController::class,'create']);
+
+    // Обновить информацию о материале
+    Route::post('update-material/{id}', [MaterialsController::class,'update']);
+
+    // Удалить выбранный материал
+    Route::get('delete-material/{id}', [MaterialsController::class,'delete']);
+
+// Окончание операций с материалами
+
+// Начать операции над теги
+
+    // Получить информации о тегах
     Route::get('tag', [TagsController::class,'main']);
-    // Edit selected Tag
+
+    // Страница для добавления нового тега
+    Route::get('create-tag', [TagsController::class,'index']);
+
+    // Редактировать выбранный тег
     Route::get('edit-tag/{id}', [TagsController::class,'edit']);
-    // Add new Tag
+
+    // Создать новый тег
     Route::post('add-tag', [TagsController::class,'create']);
-    // Delete selected Tag
+
+    // Удалить выбранный тег
     Route::get('delete-tag/{id}', [TagsController::class,'delete']);
-    // Update Material information
+
+    // Обновить информацию о теге
     Route::post('update-tag/{id}', [TagsController::class,'update']);
 
-    Route::get('create-tag', [TagsController::class,'index']);
-// End Operations on Tags
+// Завершение операций с тегами
 
-// Start Operations on Categories
+// Начать операций с тегом материала
+
+    // Получить информацию о категориях
     Route::get('category', [CategoryController::class,'main']);
+
+    // Страница добавления новой категории
+    Route::get('create-category', [CategoryController::class,'index']);
+
+    // Создать новую категорию
     Route::post('add-category', [CategoryController::class,'create']);
+
+    // Удалить выбранную категорию
     Route::get('delete-category/{id}', [CategoryController::class,'delete']);
-    // Edit selected Tag
+
+    // Редактировать выбранную категорию
     Route::get('edit-category/{id}', [CategoryController::class,'edit']);
-    // Update Material information
+
+    // Обновить информацию о категории
     Route::post('update-category/{id}', [CategoryController::class,'update']);
 
-    Route::get('create-category', [CategoryController::class,'index']);
-// End Operations on Categories
+// Завершение операций по категориям
 
-// Start Operations on Materials Tags
+// Начать операции над материалом тега
+
+    // Добавить новый тег к материалу
     Route::post('tag-material/{id}', [TagsController::class,'add']);
+
+    // Удалить тег материала
     Route::get('tagm-delete/{id}', [TagsController::class,'deleteTag']);
-// End Operations on Materials Tagsmn
 
-// Start Operations on Materials
+// Завершение операций по материалом тега
+
+// Начать операций по просмотру материала
+
+    // Просмотр материала
     Route::get('view-material/{name}', [MaterialsController::class,'view']);
-    Route::post('view-material/add-url/{id}', [UrlsController::class,'create']);
-    Route::get('delete-url/{id}', [UrlsController::class,'delete']);
-    Route::post('view-material/update-url/{id}', [UrlsController::class,'update']);
-// End Operations on Materials
 
-// Start Search operation
+    // Создать новую ссылку
+    Route::post('view-material/add-url/{id}', [UrlsController::class,'create']);
+
+    // Удалить выбранную ссылку
+    Route::get('delete-url/{id}', [UrlsController::class,'delete']);
+
+    // Обновить информацию о ссыл
+    Route::post('view-material/update-url/{id}', [UrlsController::class,'update']);
+
+// Завершение операций с тегом материала
+
+// Начать поисковые операции
+
+    // Поиск материалов по (названию, автору, типу, категории)
     Route::post('search-material', [MaterialsController::class,'search']);
+
+    // Поиск материалов по тегу
     Route::get('search-tag/{tag}', [MaterialsController::class,'searchTag']);
-// End Search operation
+
+// Завершение операций по поиску

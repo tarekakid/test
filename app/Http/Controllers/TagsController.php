@@ -8,19 +8,19 @@ use Illuminate\Http\Request;
 
 class TagsController extends Controller
 {
-    // Get Tags
+    // Получить информации о тегах
     public function main(){
         $tags = Tags::all();
         return view('list-tag', compact('tags'));
     }
 
-    // Get Types and Categories
+    // Страница для добавления нового тега
     public function index(){
         $check = null;
         return view('create-tag', compact('check'));
     }
 
-    // Add new Tag
+    // Создать новый тег
     public function create(Request $request){
 
         if(!Tags::where('tag', $request->tag)->exists()){
@@ -32,7 +32,7 @@ class TagsController extends Controller
         return redirect('tag');
     }
 
-    // Add new Tag
+    // Обновить информацию о теге
     public function update(Request $request, $id){
         $tag = Tags::where('id', $id)->first();
 
@@ -43,7 +43,7 @@ class TagsController extends Controller
         return redirect('tag');
     }
 
-    // Delete current Tag
+    // Удалить выбранный тег
     public function delete($id){
 
         $tag = Tags::where('id', $id)->first();
@@ -52,14 +52,14 @@ class TagsController extends Controller
         return redirect('tag');
     }
 
-    // Delete current Tag
+    // Редактировать выбранный тег
     public function edit($id){
         $check = 1;
         $tag = Tags::where('id', $id)->first();
         return view('create-tag', compact('tag','check'));
     }
 
-    // Delete current Tag
+    // Добавить новый тег к материалу
     public function add(Request $request){
 
         $tag_material = new TagsMaterial();
@@ -70,6 +70,7 @@ class TagsController extends Controller
         return redirect()->back();
     }
 
+    // Удалить тег материала
     public function deleteTag($id){
 
         $tag_material = TagsMaterial::where('id', $id)->first();

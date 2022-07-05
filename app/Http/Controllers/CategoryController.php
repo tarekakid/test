@@ -7,19 +7,19 @@ use App\Models\Categories;
 
 class CategoryController extends Controller
 {
-    // Get Categories information
+    // Получить информацию о категориях
      public function main(){
         $categories = Categories::all();
         return view('list-category', compact('categories'));
     }
 
-    // Get Categories information
+    // Страница добавления новой категории
     public function index(){
         $check = null;
         return view('create-category', compact('check'));
     }
 
-    //
+    // Создать новую категорию
     public function create(Request $request){
         $material = new Categories();
         $material->category = $request->category;
@@ -27,10 +27,10 @@ class CategoryController extends Controller
         return redirect('category');
     }
 
-    // Add new Tag
+    // Обновить информацию о категории
     public function update(Request $request, $id){
-        $category = Categories::where('id', $id)->first();
 
+        $category = Categories::where('id', $id)->first();
         if(!Categories::where('category', $request->category)->exists()){
             $category->category = $request->category;
             $category->save();
@@ -38,14 +38,14 @@ class CategoryController extends Controller
         return redirect('category');
     }
 
-    // Delete current Tag
+    // Редактировать выбранную категорию
     public function edit($id){
-        $check = 1;
+        $check = 1; //
         $category = Categories::where('id', $id)->first();
         return view('create-category', compact('category','check'));
     }
 
-     // Delete Category
+     // Удалить выбранную категорию
      public function delete($id){
         $category = Categories::where('id', $id)->first();
         $category->delete();

@@ -1,4 +1,5 @@
-{{-- strating of the Footer area --}}
+
+{{-- Начало области шапку --}}
 <footer class="footer py-4 mt-5 bg-light">
     <div class="container">
         <div class="row">
@@ -6,4 +7,4 @@
         </div>
     </div>
 </footer>
-{{-- strating of the Footer area --}}
+{{-- Окончание области шапку --}}

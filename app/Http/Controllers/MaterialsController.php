@@ -12,14 +12,14 @@ use Illuminate\Http\Request;
 
 class MaterialsController extends Controller
 {
-    // Get all Materials
+    // Получить информации о материалах
     public function main(){
         $search_check = null;
         $materials = Materials::all();
         return view('list-materials', compact('materials','search_check'));
     }
 
-    // Get Types and Categories
+    // Страница для добавления нового материала
     public function index(){
         $check = null;
         $types = Types::all();
@@ -27,7 +27,7 @@ class MaterialsController extends Controller
         return view('create-material', compact('types','categories','check'));
     }
 
-    // Get Types and Categories
+    // Редактировать выбранного материала
     public function edit($id){
         $check = 1;
         $material = Materials::where('id', $id)->first();
@@ -38,7 +38,7 @@ class MaterialsController extends Controller
         return view('create-material', compact('types','categories','material','check'));
     }
 
-    //Add new material
+    // Создать нового материала
     public function create(Request $request){
         $material = new Materials();
         $material->type = $request->type;
@@ -51,7 +51,7 @@ class MaterialsController extends Controller
         return redirect('/');
     }
 
-    //Update new material
+    // Обновить информацию о материале
     public function update(Request $request, $id = null){
         $material = Materials::where('id', $id)->first();
         $material->type = $request->type;
@@ -63,8 +63,9 @@ class MaterialsController extends Controller
         return redirect('/');
     }
 
-    // Get the information of the Material
+    // Просмотр материала
     public function view($name){
+
         $material = Materials::where('name', $name)->first();
         $type = Types::where('id', $material->type_id)->first();
         $category = Categories::where('id', $material->category_id)->first();
@@ -78,7 +79,7 @@ class MaterialsController extends Controller
         return view('view-material', compact('material','type','category','tags','urls'));
     }
 
-    //Update new material
+    // Удалить выбранный материал
     public function delete($id){
 
         $material = Materials::where('id', $id)->first();
@@ -92,8 +93,9 @@ class MaterialsController extends Controller
         return redirect('/');
     }
 
-    //Search material
+    // Поиск материалов по (названию, автору, типу, категории)
     public function search(Request $request){
+
         $$search_check = null;
         $search = $request->input('search');
         $materials = Materials::query()->where('name', 'LIKE', "%{$search}%")->orWhere('author', 'LIKE', "%{$search}%")->orWhere('type', 'LIKE', "%{$search}%")->orWhere('category', 'LIKE', "%{$search}%")->get();
@@ -101,8 +103,9 @@ class MaterialsController extends Controller
         return view('list-materials', compact('materials','$search_check'));
     }
 
-    //Search material by tag
+    // Поиск материалов по тегу
      public function searchTag($tag){
+
         $search_check = 1;
         $tag = Tags::where('tag', $tag)->first();
         $materials = TagsMaterial::where('tag_id', $tag->id)->get();

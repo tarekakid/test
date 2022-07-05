@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class UrlsController extends Controller
 {
-    // Add new URL
+    // Создать новую ссылку
     public function create(Request $request, $id){
 
         $urls = new Urls();
@@ -19,7 +19,7 @@ class UrlsController extends Controller
         return redirect()->back();
     }
 
-    // Add new URL
+    // Обновить информацию о ссылке
     public function update(Request $request, $id){
 
         $urls = Urls::where('id', $id)->first();
@@ -30,7 +30,7 @@ class UrlsController extends Controller
 
         return redirect()->back();
     }
-    // Delete current URL
+    // Удалить выбранную ссылку
     public function delete( $id){
 
         $urls = Urls::where('id', $id)->first();
