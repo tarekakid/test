@@ -20,6 +20,17 @@
             $("#floatingUrl").val(Url);
             $("#floatingSignature").val(Signature);
             $('#formId').attr('action', "update-url/" + id);
+            $('#formButton').text('Обновить');
+        });
+
+        addUrl
+        $(document).on("click", "#addUrl", function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $("#floatingUrl").val("");
+            $("#floatingSignature").val("");
+            $('#formId').attr('action', "add-url/" + id);
+            $('#formButton').text('Добавить');
         });
     });
 

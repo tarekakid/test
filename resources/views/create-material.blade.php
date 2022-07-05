@@ -113,7 +113,7 @@
                                 Пожалуйста, заполните поле
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit">Добавить</button>
+                        <button class="btn btn-primary" type="submit">Обновить</button>
                     </form>
                 @endif
             </div>

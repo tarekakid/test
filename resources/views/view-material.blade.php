@@ -86,8 +86,8 @@
             <div class="col-md-6">
                 <div class="d-flex justify-content-between mb-3">
                     <h3>Ссылки</h3>
-                    <a type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Добавить</a>
+                    <a type="button" class="btn btn-primary" data-bs-toggle="modal" id="addUrl"
+                        data-bs-target="#exampleModal" data-id="{{ $material->id }}">Добавить</a>
                 </div>
                 <ul class="list-group mb-4">
                     @if ($urls == null)
@@ -161,7 +161,7 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary" type="submit">Добавить</button>
+                        <button class="btn btn-primary" id="formButton" type="submit">Добавить</button>
                     </form>
                 </div>
                 <div class="modal-footer">

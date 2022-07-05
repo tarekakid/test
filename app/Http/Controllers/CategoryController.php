@@ -7,10 +7,16 @@ use App\Models\Categories;
 
 class CategoryController extends Controller
 {
-     // Get Categories information
-     public function index(){
+    // Get Categories information
+     public function main(){
         $categories = Categories::all();
         return view('list-category', compact('categories'));
+    }
+
+    // Get Categories information
+    public function index(){
+        $check = null;
+        return view('create-category', compact('check'));
     }
 
     //
@@ -19,6 +25,24 @@ class CategoryController extends Controller
         $material->category = $request->category;
         $material->save();
         return redirect('category');
+    }
+
+    // Add new Tag
+    public function update(Request $request, $id){
+        $category = Categories::where('id', $id)->first();
+
+        if(!Categories::where('category', $request->category)->exists()){
+            $category->category = $request->category;
+            $category->save();
+        }
+        return redirect('category');
+    }
+
+    // Delete current Tag
+    public function edit($id){
+        $check = 1;
+        $category = Categories::where('id', $id)->first();
+        return view('create-category', compact('category','check'));
     }
 
      // Delete Category

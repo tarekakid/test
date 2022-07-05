@@ -28,7 +28,7 @@ class TagsController extends Controller
             $tag->tag = $request->tag;
             $tag->save();
         }
-        
+
         return redirect('tag');
     }
 
@@ -36,7 +36,7 @@ class TagsController extends Controller
     public function update(Request $request, $id){
         $tag = Tags::where('id', $id)->first();
 
-        if(!Tags::where('tag', $tag->tag)->exists()){
+        if(!Tags::where('tag', $request->tag)->exists()){
             $tag->tag = $request->tag;
             $tag->save();
         }
