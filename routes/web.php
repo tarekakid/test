@@ -41,27 +41,30 @@ use Illuminate\Support\Facades\Route;
     Route::get('delete-tag/{id}', [TagsController::class,'delete']);
     // Update Material information
     Route::post('update-tag/{id}', [TagsController::class,'update']);
-    
+
     Route::get('create-tag', [TagsController::class,'index']);
 // End Operations on Tags
 
 // Start Operations on Categories
-    Route::get('category', [CategoryController::class,'index']);
+    Route::get('category', [CategoryController::class,'main']);
     Route::post('add-category', [CategoryController::class,'create']);
     Route::get('delete-category/{id}', [CategoryController::class,'delete']);
-    Route::get('create-category', function () {
-        return view('create-category');
-    });
+    // Edit selected Tag
+    Route::get('edit-category/{id}', [CategoryController::class,'edit']);
+    // Update Material information
+    Route::post('update-category/{id}', [CategoryController::class,'update']);
+
+    Route::get('create-category', [CategoryController::class,'index']);
 // End Operations on Categories
 
 // Start Operations on Materials Tags
     Route::post('tag-material/{id}', [TagsController::class,'add']);
     Route::get('tagm-delete/{id}', [TagsController::class,'deleteTag']);
-// End Operations on Materials Tags
+// End Operations on Materials Tagsmn
 
 // Start Operations on Materials
     Route::get('view-material/{name}', [MaterialsController::class,'view']);
-    Route::post('add-url/{id}', [UrlsController::class,'create']);
+    Route::post('view-material/add-url/{id}', [UrlsController::class,'create']);
     Route::get('delete-url/{id}', [UrlsController::class,'delete']);
     Route::post('view-material/update-url/{id}', [UrlsController::class,'update']);
 // End Operations on Materials
