@@ -82,13 +82,15 @@ class MaterialsController extends Controller
     // Удалить выбранный материал
     public function delete($id){
 
-        $material = Materials::where('id', $id)->first();
-        $material->delete();
-
         if(TagsMaterial::where('material_id', $id)->exists()){
             $tags = TagsMaterial::where('material_id', $id)->get();
-            $tags->delete();
+
+            foreach($tags as $tag){
+                $tag->delete();
+            }
         }
+        $material = Materials::where('id', $id)->first();
+        $material->delete();
 
         return redirect('/');
     }
@@ -107,8 +109,11 @@ class MaterialsController extends Controller
      public function searchTag($tag){
 
         $search_check = 1;
+
         $tag = Tags::where('tag', $tag)->first();
+
         $materials = TagsMaterial::where('tag_id', $tag->id)->get();
+
         return view('list-materials', compact('materials', 'search_check'));
     }
 }

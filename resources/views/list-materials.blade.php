@@ -38,11 +38,11 @@
                     @foreach ($materials as $material)
                     @php
                         if($search_check == 1){
-                            $material =Materials::where('id', $material->material_id)->first();
+                            $material = Materials::where('id', $material->material_id)->first();
                         }
                     @endphp
                         <tr>
-                            <td><a href="{{ url('view-material/' . $material->name) }}">{{ $material->name }}</a></td>
+                            <td><a href="{{ url('view-material/'. $material->name) }}">{{ $material->name }}</a></td>
                             <td>{{ $material->name }}</td>
                             <td>{{ $material->type }}</td>
                             <td>{{ $material->category }}</td>

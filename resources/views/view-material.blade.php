@@ -97,13 +97,13 @@
                     @else
                         @foreach ($urls as $url)
                             <li class="list-group-item list-group-item-action d-flex justify-content-between">
-                                <a href="#" class="me-3">
+                                <a href="{{ $url->url }}" class="me-3">
                                     {{ $url->signature == null ? $url->url:$url->signature }}
                                 </a>
                                 <input type="text" class="form-control d-none" placeholder="Напишите подпись ссылки" id="url"
                                 id="floatingSignature" value="{{ $url->id }}" >
                                 <span class="text-nowrap">
-                                    <a href="#" type="{{ $url->id }}"class="open-AddUrlDialog text-decoration-none me-2 "
+                                    <a href="#" type="{{ $url->id }}" class="open-AddUrlDialog text-decoration-none me-2 "
                                         data-bs-toggle="modal" data-bs-target="#exampleModal"
                                         data-id="{{ $url->url }}" id="{{ $url->signature }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
