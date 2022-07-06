@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('materials', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type');
-            $table->bigInteger('category_id');
+            $table->string('category_id');
             $table->string('name');
             $table->string('author');
             $table->longText('description')->nullable();
