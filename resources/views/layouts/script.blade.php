@@ -7,8 +7,10 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 <script>
     $(document).ready(function() {
+
         $('li.active').removeClass('active');
         $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
 
@@ -17,20 +19,20 @@
             var id = $(this).attr('type');
             var Url = $(this).data('id');
             var Signature = $(this).attr('id');
-            $("#floatingUrl").val(Url);
+            $("#floatinglink").val(Url);
             $("#floatingSignature").val(Signature);
-            $('#formId').attr('action', "update-url/" + id);
+            $('#formId').attr('action', "update-link/" + id);
             $('#formButton').text('Обновить');
         });
 
         $(document).on("click", "#addUrl", function(e) {
             e.preventDefault();
             var id = $(this).data('id');
-            $("#floatingUrl").val("");
+            $("#floatinglink").val("");
             $("#floatingSignature").val("");
-            $('#formId').attr('action', "add-url/" + id);
+            $('#formId').attr('action', "add-link/" + id);
             $('#formButton').text('Добавить');
         });
+
     });
-    
 </script>

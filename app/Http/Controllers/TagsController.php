@@ -23,23 +23,22 @@ class TagsController extends Controller
     // Создать новый тег
     public function create(Request $request){
 
-        if(!Tags::where('tag', $request->tag)->exists()){
-            $tag = new Tags();
-            $tag->tag = $request->tag;
-            $tag->save();
-        }
+        $this->validation($request);
+        $tag = new Tags();
+        $tag->tag = $request->tag;
+        $tag->save();
 
         return redirect('tag');
     }
 
     // Обновить информацию о теге
     public function update(Request $request, $id){
-        $tag = Tags::where('id', $id)->first();
 
-        if(!Tags::where('tag', $request->tag)->exists()){
-            $tag->tag = $request->tag;
-            $tag->save();
-        }
+        $this->validation($request);
+        $tag = Tags::where('id', $id)->first();
+        $tag->tag = $request->tag;
+        $tag->save();
+
         return redirect('tag');
     }
 
@@ -54,13 +53,25 @@ class TagsController extends Controller
 
     // Редактировать выбранный тег
     public function edit($id){
+
         $check = 1;
         $tag = Tags::where('id', $id)->first();
+
         return view('create-tag', compact('tag','check'));
     }
 
+
     // Добавить новый тег к материалу
     public function add(Request $request){
+
+        $request->validate(
+            [
+                'tag_id' => 'required'
+            ],
+            [
+                'tag_id.required' => 'Пожалуйста, выберите значение'
+            ]
+        );
 
         $tag_material = new TagsMaterial();
         $tag_material->material_id = $request->material_id;
@@ -77,5 +88,18 @@ class TagsController extends Controller
         $tag_material->delete();
 
         return redirect()->back();
+    }
+
+    public function validation(Request $request)
+    {
+        $request->validate(
+            [
+                'tag' => 'required|string|unique:tags,tag'
+            ],
+            [
+                'tag.required' => 'Пожалуйста, заполните поле',
+                'tag.unique' => 'Тег уже существует',
+            ]
+        );
     }
 }

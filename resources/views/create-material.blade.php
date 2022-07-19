@@ -12,40 +12,54 @@
                     <form runat="server" method="POST" action="{{ url('add-material') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelectType" name="type" required>
-                                <option selected>Выберите тип</option>
+                            <select class="form-select @error('type') is-invalid @enderror" id="floatingSelectType"
+                                name="type">
+                                <option value="" selected>Выберите тип</option>
                                 @foreach ($types as $type)
                                     <option value="{{ $type->type }}">{{ $type->type }}</option>
                                 @endforeach
                             </select>
                             <label for="floatingSelectType">Тип</label>
-                            <div class="invalid-feedback">
-                                Пожалуйста, выберите значение
-                            </div>
+                            @if ($errors->any())
+                                @error('type')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            @endif
                         </div>
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelectCategory" name="category" required>
-                                <option selected>Выберите категорию</option>
+                            <select class="form-select @error('category') is-invalid @enderror" id="floatingSelectCategory"
+                                name="category">
+                                <option value="" selected>Выберите категорию</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->category }}">{{ $category->category }}</option>
                                 @endforeach
                             </select>
                             <label for="floatingSelectCategory">Категория</label>
-                            <div class="invalid-feedback">
-                                Пожалуйста, выберите значение
-                            </div>
+                            @if ($errors->any())
+                                @error('category')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            @endif
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" placeholder="Напишите название" id="floatingName"
-                                name="name" required>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                placeholder="Напишите название" id="floatingName" name="name">
                             <label for="floatingName">Название</label>
-                            <div class="invalid-feedback">
-                                Пожалуйста, заполните поле
-                            </div>
+                            @if ($errors->any())
+                                @error('name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            @endif
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" placeholder="Напишите авторов" id="floatingAuthor"
-                                name="author" required>
+                                name="author">
                             <label for="floatingAuthor">Авторы</label>
                             <div class="invalid-feedback">
                                 Пожалуйста, заполните поле
@@ -66,36 +80,50 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelectType" name="type">
-                                @foreach ($types as $tp)
-                                    <option {{ $tp->type == $material->type ? 'selected' : '' }}
-                                        value="{{ $tp->type }}">{{ $tp->type }}</option>
+                            <select class="form-select @error('type') is-invalid @enderror" id="floatingSelectType"
+                                name="type">
+                                <option value="{{ $material->type }}" selected>{{ $material->type }}</option>
+                                @foreach ($types as $type)
+                                    <option value="{{ $type->type }}">{{ $type->type }}</option>
                                 @endforeach
                             </select>
                             <label for="floatingSelectType">Тип</label>
-                            <div class="invalid-feedback">
-                                Пожалуйста, выберите значение
-                            </div>
+                            @if ($errors->any())
+                                @error('type')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            @endif
                         </div>
                         <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelectCategory" name="category">
-                                @foreach ($categories as $cat)
-                                    <option {{ $cat->category == $material->category ? 'selected' : '' }}
-                                        value="{{ $cat->category }}">{{ $cat->category }}</option>
+                            <select class="form-select @error('category') is-invalid @enderror" id="floatingSelectCategory"
+                                name="category">
+                                <option value="{{ $material->category }}" selected>{{ $material->category }}</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->category }}">{{ $category->category }}</option>
                                 @endforeach
                             </select>
                             <label for="floatingSelectCategory">Категория</label>
-                            <div class="invalid-feedback">
-                                Пожалуйста, выберите значение
-                            </div>
+                            @if ($errors->any())
+                                @error('category')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            @endif
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" placeholder="Напишите название" id="floatingName"
-                                name="name" value="{{ $material->name }}">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                placeholder="Напишите название" id="floatingName" name="name" value="{{ $material->name }}">
                             <label for="floatingName">Название</label>
-                            <div class="invalid-feedback">
-                                Пожалуйста, заполните поле
-                            </div>
+                            @if ($errors->any())
+                                @error('name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            @endif
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" placeholder="Напишите авторов" id="floatingAuthor"

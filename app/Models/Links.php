@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Urls extends Model
+class Links extends Model
 {
     use HasFactory;
-    protected $table ='urls';
+    protected $table ='links';
     protected $fillable = [
         'material_id',
         'signature',
-        'url'
+        'link'
     ];
 }

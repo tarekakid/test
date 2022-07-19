@@ -7,7 +7,7 @@ use App\Models\Materials;
 use App\Models\Tags;
 use App\Models\TagsMaterial;
 use App\Models\Types;
-use App\Models\Urls;
+use App\Models\Links;
 use Illuminate\Http\Request;
 
 class MaterialsController extends Controller
@@ -40,6 +40,8 @@ class MaterialsController extends Controller
 
     // Создать нового материала
     public function create(Request $request){
+        $this->validation($request);
+
         $material = new Materials();
         $material->type = $request->type;
         $material->category = $request->category;
@@ -53,6 +55,8 @@ class MaterialsController extends Controller
 
     // Обновить информацию о материале
     public function update(Request $request, $id = null){
+        $this->validation($request);
+
         $material = Materials::where('id', $id)->first();
         $material->type = $request->type;
         $material->category = $request->category;
@@ -60,6 +64,7 @@ class MaterialsController extends Controller
         $material->author = $request->author;
         $material->description = $request->description;
         $material->save();
+
         return redirect('/');
     }
 
@@ -70,13 +75,14 @@ class MaterialsController extends Controller
         $type = Types::where('id', $material->type_id)->first();
         $category = Categories::where('id', $material->category_id)->first();
         $tags = Tags::all();
-        $urls = null;
-        if(Urls::where('material_id', $material->id)->exists())
+
+        $links = null;
+        if(Links::where('material_id', $material->id)->exists())
         {
-            $urls = Urls::where('material_id', $material->id)->get();
+            $links = Links::where('material_id', $material->id)->get();
         }
 
-        return view('view-material', compact('material','type','category','tags','urls'));
+        return view('view-material', compact('material','type','category','tags','links'));
     }
 
     // Удалить выбранный материал
@@ -109,11 +115,25 @@ class MaterialsController extends Controller
      public function searchTag($tag){
 
         $search_check = 1;
-
         $tag = Tags::where('tag', $tag)->first();
-
         $materials = TagsMaterial::where('tag_id', $tag->id)->get();
 
         return view('list-materials', compact('materials', 'search_check'));
+    }
+
+    public function validation(Request $request)
+    {
+        $request->validate(
+            [
+                'type' => 'required|string',
+                'category' => 'required|string',
+                'name' => 'required|string',
+            ],
+            [
+                'type.required' => 'Пожалуйста, выберите значение',
+                'category.required' => 'Пожалуйста, выберите значение',
+                'name.required' => 'Пожалуйста, заполните поле',
+            ]
+        );
     }
 }

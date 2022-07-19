@@ -3,7 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MaterialsController;
 use App\Http\Controllers\TagsController;
-use App\Http\Controllers\UrlsController;
+use App\Http\Controllers\LinksController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -99,13 +99,13 @@ use Illuminate\Support\Facades\Route;
     Route::get('view-material/{name}', [MaterialsController::class,'view']);
 
     // Создать новую ссылку
-    Route::post('view-material/add-url/{id}', [UrlsController::class,'create']);
+    Route::post('add-link/{id}', [LinksController::class,'create']);
 
     // Удалить выбранную ссылку
-    Route::get('delete-url/{id}', [UrlsController::class,'delete']);
+    Route::get('delete-link/{id}', [LinksController::class,'delete']);
 
     // Обновить информацию о ссыл
-    Route::post('view-material/update-url/{id}', [UrlsController::class,'update']);
+    Route::post('view-material/update-link/{id}', [LinksController::class,'update']);
 
 // Завершение операций с тегом материала
 

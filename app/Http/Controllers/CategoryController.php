@@ -15,12 +15,14 @@ class CategoryController extends Controller
 
     // Страница добавления новой категории
     public function index(){
-        $check = null;
+        $check = 0;
         return view('create-category', compact('check'));
     }
 
     // Создать новую категорию
     public function create(Request $request){
+        $this->validation($request);
+
         $material = new Categories();
         $material->category = $request->category;
         $material->save();
@@ -29,6 +31,8 @@ class CategoryController extends Controller
 
     // Обновить информацию о категории
     public function update(Request $request, $id){
+
+        $this->validation($request);
 
         $category = Categories::where('id', $id)->first();
         if(!Categories::where('category', $request->category)->exists()){
@@ -45,10 +49,23 @@ class CategoryController extends Controller
         return view('create-category', compact('category','check'));
     }
 
-     // Удалить выбранную категорию
-     public function delete($id){
+    // Удалить выбранную категорию
+    public function delete($id){
         $category = Categories::where('id', $id)->first();
         $category->delete();
         return redirect('category');
+    }
+
+    public function validation(Request $request)
+    {
+        $request->validate(
+            [
+                'category' => 'required|string|unique:categories,category',
+            ],
+            [
+                'category.required' => 'Пожалуйста, заполните поле',
+                'category.unique' => 'Категория уже существует',
+            ]
+        );
     }
 }

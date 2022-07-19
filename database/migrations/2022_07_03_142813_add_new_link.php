@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         //
-        Schema::create('urls', function(Blueprint $table){
+        Schema::create('links', function(Blueprint $table){
             $table->bigIncrements('id');
             $table->bigInteger('material_id');
             $table->string('signature')->nullable();
-            $table->string('url');
+            $table->string('link');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('urls');
+        Schema::dropIfExists('links');
     }
 };
